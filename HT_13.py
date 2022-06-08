@@ -82,14 +82,31 @@ import random
 
 # HT_13_6
 # Напишите функцию, вычисляющую значение факториала числа N. Используйте рекурсию
-def factorial(n):
-    if n == 0:
-        return 1
-    return factorial(n - 1) * n
+# def factorial(n):
+#     if n == 0:
+#         return 1
+#     return factorial(n - 1) * n
+#
+#
+# print(factorial(int(input())))
+
+# 13_11
+def decor(f_to_be_decor):
+    def wrapper_func(param1, param2):
+        n1 = param2
+        n2 = param1
+        return n1 / n2
+    return wrapper_func
 
 
-print(factorial(int(input())))
+@decor
+def div(a, b):
+    return a/b
 
+
+first = int(input())
+second = int(input())
+print(div(first, second))
 
 
 
