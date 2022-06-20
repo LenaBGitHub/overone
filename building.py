@@ -4,7 +4,7 @@ class Building:
         self.windows = windows
         self.doors = doors
 
-    def build(self) -> object:
+    def build(self):
         return f'The house was built'
 
     def populate(self):
@@ -18,6 +18,21 @@ class PrivateHouse(Building):
     def __init__(self, floor, windows, doors, rooms):
         super().__init__(floor, windows, doors)
         self.rooms = rooms
+
+
+class BusinessCenter(Building):
+    def __init__(self, floor, windows, doors):
+        super().__init__(floor, windows, doors)
+        self.floor = [None] * floor
+
+    def build(self):
+        print(f'The Business Center was built')
+
+    def __setitem__(self, floor_number, company_name):
+        self.floor[floor_number] = company_name
+
+    def __getitem__(self, floor_number):
+        return self.floor[floor_number]
 
 
 class MultistoryHouse(Building):
@@ -38,7 +53,6 @@ class MultistoryHouse(Building):
 
 
 class BeautySalonMixin:
-
     """Маникюр стоит на 20% больше мин цены
 Стрижка зависит от длины волос: меньше 30см - +20%, От 30 до 50 см - +50% Свыше 50 см - +80%"""
     min_price = 35
@@ -90,3 +104,9 @@ if __name__ == "__main__":
     print(hbs.open_time)
     print(hbs.haircut(25))
     print(hbs.manicure())
+if __name__ == '__main__':
+    building1 = BusinessCenter(4, 20, 20)
+    building1.build()
+    building1[0] = 'Arabian Coffee'
+    building1[1] = 'Overone'
+    print(building1[1])
