@@ -4,7 +4,7 @@ class Building:
         self.windows = windows
         self.doors = doors
 
-    def build(self):
+    def build(self) -> object:
         return f'The house was built'
 
     def populate(self):
