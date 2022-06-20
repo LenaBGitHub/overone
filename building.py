@@ -43,6 +43,16 @@ class BeautySalonMixin:
 Стрижка зависит от длины волос: меньше 30см - +20%, От 30 до 50 см - +50% Свыше 50 см - +80%"""
     min_price = 35
 
+    def __init__(self):
+        self.close_time = None
+        self.open_time = None
+
+    def salon_opening_hours(self, time):
+        if self.close_time > time > self.open_time:
+            return f'The salon is opened at {time}'
+        else:
+            return f'The salon is closed at {time}'
+
     def manicure(self):
         return f'Manicure costs {self.min_price * 1.2}'
 
@@ -58,18 +68,10 @@ class BeautySalonMixin:
 class HouseWithBeautySalon(Building, BeautySalonMixin):
     def __init__(self, floor, windows, doors):
         super(HouseWithBeautySalon, self).__init__(floor, windows, doors)
-        self.open_time = None
-        self.close_time = None
 
     def set_timework(self, salon_opening_hours, salon_closing_hours):
         self.open_time = salon_opening_hours
         self.close_time = salon_closing_hours
-
-    def salon_opening_hours(self, time):
-        if self.close_time > time > self.open_time:
-            return f'The salon is opened at {time}'
-        else:
-            return f'The salon is closed at {time}'
 
 
 if __name__ == "__main__":
