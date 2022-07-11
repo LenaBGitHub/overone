@@ -1,0 +1,15 @@
+<h1>{{ question.question_text }}</h1>  <!-- h1 - Создает заголовок первого уровня -->
+
+{% if error.message %} <p><strong>{{error_message}}</strong></p>{% endif %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+
+    <!-- <form> Форма для сбора и отправки на сервер информации от пользователей. Не работает без атрибута action. -->
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <!-- input - Создает многофункциональные поля формы, в которые пользователь может вводить данные. -->
+    <label for="choice{{ forloop.counter }}"> {{ choice.choice_text }} </label><br>
+    <!-- label - Добавляет текстовую метку для элемента <input>. -->
+{% endfor%}
+<input type="submit" value="vote">
+</form>
